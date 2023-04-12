@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var waterparkTxt: UITextField!
     
 var cityList = ["ahmeadabad","surat","pune","rajkot","mumbai","chennai","banglore"]
-
+var month = ["january","february","march","april","may","june","july","Aughest ","september","october","november","december"]
 let cityPicker = UIPickerView()
 let toolbar = UIToolbar()
     override func viewDidLoad() {
@@ -28,22 +28,34 @@ let toolbar = UIToolbar()
         @objc func doneButtonePressed()
     {
         let SelectedCities = cityList[cityPicker.selectedRow(inComponent: 0)]
-        waterparkTxt.text = SelectedCities
+        let Selectedmonths = month[cityPicker.selectedRow(inComponent: 1)]
+        waterparkTxt.text = "\(SelectedCities) \(Selectedmonths)"
         self.view.endEditing(true)
+        
     }
 
 }
 extension ViewController :UIPickerViewDelegate,UIPickerViewDataSource{
          func numberOfComponents(in pickerView: UIPickerView) -> Int {
-         return 1
+         return 2
    }
  // how much number of rows in perticular selaction
          func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+             if  component == 0 {
          return cityList.count
-}
+             }
+             else {
+                 return month.count
+             }
+         }
   //data display in row
          func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+             if component == 0 {
          return cityList[row]
     }
-    
+             else{
+                return month[row]
+            }
+         }
+
 }
